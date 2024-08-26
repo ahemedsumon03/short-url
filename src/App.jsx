@@ -12,17 +12,23 @@ const App = () => {
 
   const handleShortUrl = async () => {
     setLoading(true);
-    const { data } = await axios.post(`https://api.shrtco.de/v2/shorten?url=${inputData}`);
+    const { data } = await axios.post('https://shrtlnk.dev/api/v2/link', { url: inputData }, {
+      headers: {
+        'api-key': 'h8QGhEWOVBmuD4ndBD9wi9D1x7utnNhirZDaBtY7zYfxx',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    });
     setLoading(false);
-    Setshorturl(data.result.full_short_link);
+    Setshorturl(data?.shrtlnk);
   }
 
 
   return (
     <div className='maincontainer'>
-      <Urlinput setInputData={setInputData} handleShortUrl={handleShortUrl} loading={ loading } />
+      <Urlinput setInputData={setInputData} handleShortUrl={handleShortUrl} loading={loading} />
       <BackgroundColor />
-      <Linkresult shorturl={shorturl}  />
+      <Linkresult shorturl={shorturl} />
     </div>
   )
 }
